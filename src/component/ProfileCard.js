@@ -1,8 +1,8 @@
 import React from "react";
 
-const ProfileCard = ({ username, account, image, balance }) => {
+const ProfileCard = ({ username, account, balance }) => {
   return (
-    <div className="bg-gradient-to-br from-indigo-500  mb-2 to-blue-500 rounded-lg p-6 shadow-2xl w-[60vh] xl:w-[35vh] ">
+    <div className="bg-gradient-to-br from-indigo-600  mb-2 to-blue-500 rounded-lg p-6 shadow-2xl w-[60vh] xl:w-[35vh] ">
       <div className="flex justify-between items-center mb-4">
         <p className="text-white">Cardholder Name</p>
         <p className="text-white font-bold">{username}</p>
@@ -23,7 +23,7 @@ const ProfileCard = ({ username, account, image, balance }) => {
       </div>
       <div className="flex justify-center items-center mt-6">
         <p className="text-gray-50 opacity-60 text-center">
-          Account Number: <span className="text-white">{account}</span>
+          Account Number: <span className="text-white ml-1">{account}</span>
         </p>
       </div>
     </div>

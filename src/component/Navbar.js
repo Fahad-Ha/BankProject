@@ -1,19 +1,13 @@
-import React, { useContext, useState } from "react";
-// import { useContext } from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { logout, me } from "../api/auth";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
-// import UserContext from "../context/UserContext";
-// import { logout } from "../api/auth";
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
   const [user, setUser] = useContext(UserContext);
   // Get profile data
-  const { data: profile } = useQuery({
-    queryKey: ["profile"],
-    queryFn: () => me(),
-  });
+  const { data: profile } = useQuery(["profile"], () => me());
 
   return (
     <nav className="bg-gray-800">
@@ -25,7 +19,7 @@ const Navbar = () => {
                 <img
                   className="w-16 mr-2 rounded-full"
                   src={`https://coded-projects-api.herokuapp.com${profile?.image}`}
-                  alt="Porfile Image"
+                  alt="Profile Image"
                 />
                 <span className="font-semibold text-xl text-white">
                   {`Welcome, ${profile.username}`}
@@ -42,8 +36,10 @@ const Navbar = () => {
           <div className="block">
             <div className="ml-10 flex items-baseline space-x-4">
               <NavLink
+                exact
                 to="/"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                activeStyle={{ backgroundColor: "blue", color: "white" }}
               >
                 Home
               </NavLink>
@@ -53,14 +49,16 @@ const Navbar = () => {
                   <NavLink
                     to="/profile"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
-                    profile
+                    Profile
                   </NavLink>
                   <NavLink
                     to="/users"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
-                    users
+                    Users
                   </NavLink>
                   <NavLink
                     onClick={() => {
@@ -78,12 +76,14 @@ const Navbar = () => {
                   <NavLink
                     to="/login"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
                     Login
                   </NavLink>
                   <NavLink
                     to="/register"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
                     Register
                   </NavLink>

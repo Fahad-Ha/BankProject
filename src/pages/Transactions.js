@@ -77,7 +77,7 @@ const Transactions = () => {
         <label htmlFor="amount" className="mr-2 text-lg">
           Filter:
         </label>
-        <div className="flex items-center sm:flex-col sm:mb-4 md:mb-0 md:flex-row">
+        <div className="flex items-center sm:flex-col sm:mb-4 md:mb-0 md:flex-row ">
           <input
             type="number"
             placeholder="Amount"

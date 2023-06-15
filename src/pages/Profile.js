@@ -61,7 +61,7 @@ const Profile = () => {
   const { username, account, image } = profile;
 
   return (
-    <div className="flex flex-col justify-center items-center  bg-gradient-to-r from-blue-300 to-indigo-400 min-h-screen">
+    <div className="flex flex-col justify-center items-center  bg-gradient-to-r from-blue-400 to-indigo-400 min-h-[90.7vh] xl:min-h-screen">
       {/* <div
         onClick={() => {
           navigate("/transactions");
@@ -78,7 +78,7 @@ const Profile = () => {
         onClick={() => {
           navigate("/transactions");
         }}
-        className="h-20 w-80 mt-4 mb-2 bg-gray-800 text-white rounded-full mt-5 flex items-center justify-center hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+        className="h-20 w-80 mb-2 bg-gray-800 text-white rounded-full mt-5 flex items-center justify-center hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
       >
         {`Balance: ${balanceData} KD `}
       </button>
@@ -164,49 +164,6 @@ const Profile = () => {
       </div>
 
       {/* Tab Ends */}
-
-      {/* <label htmlFor="amount" className="mr-2">
-          Amount:
-        </label>
-        <input
-          className="bg-gray-100 px-2 py-1 rounded"
-          type="number"
-          id="amount"
-          name="amount"
-          required
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button
-          type="submit"
-          onClick={depositFun}
-          disabled={depositLoading}
-          className="w-40 h-9  bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out ml-4"
-        >
-          {depositLoading ? "Adding Funds..." : "Add Funds"}
-        </button> */}
-
-      {/* <form onSubmit={handleBalanceSubmit} className="mt-4 mb-24">
-        <label htmlFor="amount" className="mr-2">
-          Amount:
-        </label>
-        <input
-          className="bg-gray-100 px-2 py-1 rounded"
-          type="number"
-          id="amountWit"
-          name="amountWit"
-          required
-          onChange={(e) => setAmountWit(e.target.value)}
-        />
-
-        <button
-          type="submit"
-          onClick={withdrawalFun}
-          disabled={withdrawalLoading}
-          className="w-40 h-9  bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out ml-4"
-        >
-          {withdrawalLoading ? "Withdrawing..." : "witdrawal"}
-        </button>
-      </form> */}
     </div>
   );
 };
