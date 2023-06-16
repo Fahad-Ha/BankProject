@@ -23,7 +23,7 @@ const Navbar = () => {
                     alt="Profile Image"
                   />
                   <span className="font-semibold text-xl text-white py-2">
-                    {`Welcome, ${profile.username}`}
+                    {`Welcome, ${profile?.username}`}
                   </span>
                 </div>
               </Link>
