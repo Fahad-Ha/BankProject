@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             {user ? (
-              <Link to="profile">
+              <Link to="/profile">
                 <div className="flex">
                   <img
                     className="w-16 mr-2 rounded-full"

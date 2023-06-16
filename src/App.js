@@ -9,6 +9,7 @@ import { useState } from "react";
 import UserContext from "./context/UserContext";
 import Profile from "./pages/Profile";
 import Transactions from "./pages/Transactions";
+import UserDetails from "./pages/UserDetails";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/user/:UserId" element={<UserDetails />} />
           <Route path="/transactions" element={<Transactions />} />
         </Routes>
       </div>

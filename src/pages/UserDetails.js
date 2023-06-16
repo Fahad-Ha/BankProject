@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getUsers } from "../api/auth";
-import { Link } from "react-router-dom";
 
-const User = () => {
+const UserDetails = () => {
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
@@ -18,21 +17,17 @@ const User = () => {
               key={user._id}
               className="bg-gray-700 p-6 rounded-md flex flex-col items-center justify-center bg-gradient-to-r from-emerald-500  to-teal-500 shadow-2xl"
             >
-              <Link to="/UserDetails">
-                <img
-                  src={`https://coded-projects-api.herokuapp.com${user.image}`}
-                  alt="User"
-                  className="w-24 h-24 rounded-full mb-4"
-                />
-
-                <div className="text-center">
-                  <h3 className="text-lg text-white font-semibold mb-2">
-                    {user.username}
-                  </h3>
-
-                  <p className="text-gray-300">{user.account}</p>
-                </div>
-              </Link>
+              <img
+                src={`https://coded-projects-api.herokuapp.com${user.image}`}
+                alt="User"
+                className="w-24 h-24 rounded-full mb-4"
+              />
+              <div className="text-center">
+                <h3 className="text-lg text-white font-semibold mb-2">
+                  {user.username}
+                </h3>
+                <p className="text-gray-300">{user.account}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -41,4 +36,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserDetails;

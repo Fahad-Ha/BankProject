@@ -13,12 +13,15 @@ const Profile = () => {
   const [amount, setAmount] = useState(0);
   const [errorMsgBalance, setErrorMsgBalance] = useState(false);
   const [errorMsgValue, setErrorMsgValue] = useState("");
+  const [successOper, setSuccessOper] = useState(false);
+  const [msgColor, setMsgColor] = useState("bg-red-500");
 
   //For Tabs
   const [selectedTab, setSelectedTab] = useState("tab1");
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
     setErrorMsgBalance(false);
+    setSuccessOper(false);
   };
 
   // Get profile data
@@ -37,16 +40,20 @@ const Profile = () => {
   const { mutate: depositFun, isLoading: depositLoading } = useMutation({
     mutationFn: () => {
       if (amount > 0) {
+        setMsgColor("bg-green-500");
+        setErrorMsgValue("Success Deposit Amount: " + amount);
         return deposit(amount);
       } else {
+        setMsgColor("bg-red-500");
         setErrorMsgValue("Please, enter a valid amount to deposit.");
-        return setErrorMsgBalance(true);
+        setErrorMsgBalance(true);
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["balance"]);
       setAmount(0);
       document.getElementById("amount").value = "";
+      setSuccessOper(true);
     },
   });
 
@@ -54,9 +61,12 @@ const Profile = () => {
   const [amountWit, setAmountWit] = useState(0);
   const { mutate: withdrawalFun, isLoading: withdrawalLoading } = useMutation({
     mutationFn: () => {
-      if (balanceData >= amountWit) {
+      if (balanceData >= amountWit && amountWit > 0) {
+        setMsgColor("bg-green-500");
+        setErrorMsgValue("Success Withdrawal Amount: " + amountWit);
         return withdrawal(amountWit);
       } else {
+        setMsgColor("bg-red-500");
         setErrorMsgValue("Insufficient balance, cannot withdraw");
         return setErrorMsgBalance(true);
       }
@@ -65,6 +75,7 @@ const Profile = () => {
       queryClient.invalidateQueries(["balance"]);
       setAmountWit(0);
       document.getElementById("amountWit").value = "";
+      setSuccessOper(true);
     },
   });
 
@@ -79,11 +90,11 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col justify-center items-center  bg-gradient-to-r from-blue-400 to-indigo-400 min-h-[90.7vh] xl:min-h-screen">
-      {errorMsgBalance && (
-        <div className="w-full text-white px-44 mt-[-83vh] absolute">
-          <ErrorMsg msg={errorMsgValue} />
+      {errorMsgBalance || successOper ? (
+        <div className="w-full text-white px-52 mt-[-83vh] absolute font-semibold">
+          <ErrorMsg msg={errorMsgValue} color={msgColor} />
         </div>
-      )}
+      ) : null}
 
       {/* <div
         onClick={() => {
@@ -178,7 +189,7 @@ const Profile = () => {
                   disabled={withdrawalLoading}
                   className="w-40 h-9  bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out ml-4"
                 >
-                  {withdrawalLoading ? "Withdrawing..." : "Witdrawal"}
+                  {withdrawalLoading ? "Withdrawing..." : "Withdrawal"}
                 </button>
               </form>
             )}
