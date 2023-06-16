@@ -15,31 +15,29 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             {user ? (
-              <>
-                <img
-                  className="w-16 mr-2 rounded-full"
-                  src={`https://coded-projects-api.herokuapp.com${profile?.image}`}
-                  alt="Profile Image"
-                />
-                <span className="font-semibold text-xl text-white">
-                  {`Welcome, ${profile.username}`}
-                </span>
-              </>
+              <Link to="profile">
+                <div className="flex">
+                  <img
+                    className="w-16 mr-2 rounded-full"
+                    src={`https://coded-projects-api.herokuapp.com${profile?.image}`}
+                    alt="Profile Image"
+                  />
+                  <span className="font-semibold text-xl text-white py-2">
+                    {`Welcome, ${profile.username}`}
+                  </span>
+                </div>
+              </Link>
             ) : (
               <Link to="/">
-                <span className="font-semibold text-xl text-white">
-                  CODED Bank
-                </span>
+                <span className="font-semibold text-xl text-white">F Bank</span>
               </Link>
             )}
           </div>
           <div className="block">
             <div className="ml-10 flex items-baseline space-x-4">
               <NavLink
-                exact
                 to="/"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                activeStyle={{ backgroundColor: "blue", color: "white" }}
               >
                 Home
               </NavLink>
@@ -49,14 +47,12 @@ const Navbar = () => {
                   <NavLink
                     to="/profile"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
                     Profile
                   </NavLink>
                   <NavLink
                     to="/users"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
                     Users
                   </NavLink>
@@ -76,14 +72,12 @@ const Navbar = () => {
                   <NavLink
                     to="/login"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
                     Login
                   </NavLink>
                   <NavLink
                     to="/register"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                    activeStyle={{ backgroundColor: "blue", color: "white" }}
                   >
                     Register
                   </NavLink>

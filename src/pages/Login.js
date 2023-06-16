@@ -3,12 +3,13 @@ import { login } from "../api/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
 import UserContext from "../context/UserContext";
-import User from "./Users";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ErrorMsg from "../component/ErrorMsg";
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({});
   const [user, setUser] = useContext(UserContext);
+  const [errorMsg, setErrorMsg] = useState(false);
   const navigate = useNavigate();
 
   const { mutate: loginFn } = useMutation({
@@ -17,6 +18,8 @@ const Login = () => {
       if (localStorage.getItem("token")) {
         setUser(true);
         navigate("/profile");
+      } else {
+        setErrorMsg(true);
       }
     },
   });
@@ -25,10 +28,10 @@ const Login = () => {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     // Add login logic here
     // console.log(userInfo);
     loginFn();
-    console.log(user);
   };
 
   return (
@@ -37,6 +40,7 @@ const Login = () => {
         <h2 className="text-3xl text-white font-semibold mb-6">Login</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
+            {errorMsg && <ErrorMsg msg={"Invalid Username or Password."} />}
             <label
               htmlFor="username"
               className="block text-white text-sm font-medium mb-2"

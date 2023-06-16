@@ -12,6 +12,7 @@ import Transactions from "./pages/Transactions";
 
 function App() {
   const [user, setUser] = useState(false);
+
   return (
     <UserContext.Provider value={[user, setUser]}>
       <div className="App">

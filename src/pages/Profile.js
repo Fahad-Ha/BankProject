@@ -1,19 +1,24 @@
 import React, { useContext, useState } from "react";
-import { login, me, balance, deposit, withdrawal } from "../api/auth";
+import { me, balance, deposit, withdrawal } from "../api/auth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import ProfileCard from "../component/ProfileCard";
+import ErrorMsg from "../component/ErrorMsg";
 
 const Profile = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [user, setUser] = useContext(UserContext);
+  const [amount, setAmount] = useState(0);
+  const [errorMsgBalance, setErrorMsgBalance] = useState(false);
+  const [errorMsgValue, setErrorMsgValue] = useState("");
 
   //For Tabs
   const [selectedTab, setSelectedTab] = useState("tab1");
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
+    setErrorMsgBalance(false);
   };
 
   // Get profile data
@@ -29,9 +34,15 @@ const Profile = () => {
   });
 
   // Deposit funds
-
   const { mutate: depositFun, isLoading: depositLoading } = useMutation({
-    mutationFn: () => deposit(amount),
+    mutationFn: () => {
+      if (amount > 0) {
+        return deposit(amount);
+      } else {
+        setErrorMsgValue("Please, enter a valid amount to deposit.");
+        return setErrorMsgBalance(true);
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(["balance"]);
       setAmount(0);
@@ -42,17 +53,23 @@ const Profile = () => {
   // Withdraw funds
   const [amountWit, setAmountWit] = useState(0);
   const { mutate: withdrawalFun, isLoading: withdrawalLoading } = useMutation({
-    mutationFn: () => withdrawal(amountWit),
+    mutationFn: () => {
+      if (balanceData >= amountWit) {
+        return withdrawal(amountWit);
+      } else {
+        setErrorMsgValue("Insufficient balance, cannot withdraw");
+        return setErrorMsgBalance(true);
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(["balance"]);
       setAmountWit(0);
       document.getElementById("amountWit").value = "";
     },
   });
-  const [amount, setAmount] = useState(0);
+
   const handleBalanceSubmit = (e) => {
     e.preventDefault();
-    // console.log(e.target.amount.value);
   };
 
   if (!user) return <Navigate to="/" />;
@@ -62,6 +79,12 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col justify-center items-center  bg-gradient-to-r from-blue-400 to-indigo-400 min-h-[90.7vh] xl:min-h-screen">
+      {errorMsgBalance && (
+        <div className="w-full text-white px-44 mt-[-83vh] absolute">
+          <ErrorMsg msg={errorMsgValue} />
+        </div>
+      )}
+
       {/* <div
         onClick={() => {
           navigate("/transactions");

@@ -5,7 +5,7 @@ const login = async (userInfo) => {
   try {
     const { data } = await instance.post("/auth/v3/login", userInfo);
     storeToken(data.access);
-    // console.log(data);
+
     return data;
   } catch (error) {
     console.log(error);
@@ -22,12 +22,10 @@ const register = async (userInfo) => {
     return data;
   } catch (error) {
     if (error.response.data.details?.password.includes("/[a-zA-Z0-9]{8,30}/")) {
-      alert(
-        "Password must at least 8 digits with a combination of numbers and letters"
-      );
+      return error.response.data.details?.password;
     }
     if (error.response.data.message?.includes("E11000 duplicate key error")) {
-      alert("Username already exists, please use another username");
+      return error.response.data?.message;
     }
   }
 };
@@ -55,7 +53,6 @@ const balance = async () => {
 const transactions = async () => {
   try {
     const { data } = await instance.get("/bank/v3/transactions");
-    console.log(data[0]);
     return data;
   } catch (error) {
     console.log(error);
