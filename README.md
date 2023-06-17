@@ -1,6 +1,7 @@
 # Demo
 
-[Try demo on netlify](https://648cbecb9ea3320e3ad1a6f1--remarkable-taiyaki-e55604.netlify.app/)
+Try the live demo
+[Demo on netlify](https://648cbecb9ea3320e3ad1a6f1--remarkable-taiyaki-e55604.netlify.app/)
 
 # Getting Started with Create React App
 

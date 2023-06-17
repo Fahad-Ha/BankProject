@@ -53,9 +53,11 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-400 to-indigo-400 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
-      <div className="max-w-md w-full px-6 py-8 bg-gradient-to-br from-indigo-600  mb-2 to-blue-600 rounded-lg p-6 shadow-2xl">
-        <h2 className="text-3xl text-white font-semibold mb-6">Register</h2>
+    <div className="bg-gradient-to-r from-blue-400 to-indigo-400 min-h-screen flex items-center justify-center absolute inset-0 z-[-1] ">
+      <div className="max-w-md w-full px-6 py-8 bg-gradient-to-br from-indigo-600  mb-2 to-blue-600 rounded-lg p-6 shadow-2xl mx-6 md:mx-0">
+        <h2 className="text-2xl md:text-3xl text-white font-semibold mb-6">
+          Register
+        </h2>
         <form onSubmit={handleFormSubmit}>
           {errorMsgName && (
             <ErrorMsg
